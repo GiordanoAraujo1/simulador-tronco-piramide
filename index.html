@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Simulador 3D de tronco de pirâmide para aprender: dois grupos de controles visíveis, medidas inteiras e potências de dez até 10¹², fórmula, volume e referências matemáticas.">
+<title>Explore o tronco de pirâmide — Simulador 3D</title>
+<style>
+:root{color-scheme:light;--ink:#18283b;--navy:#173e59;--blue:#146e91;--teal:#076e73;--muted:#52657a;--line:#d6e0e7;--soft:#f2f7f9;--paper:#fff;--gold:#b38329}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eaf0f3;color:var(--ink);font:15px/1.62 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button,select{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #15a1b6;outline-offset:3px}
+a{color:#126884;text-decoration-thickness:1px;text-underline-offset:3px}a:hover{color:#07516a}.wrap{max-width:1320px;margin:auto;padding:0 24px 48px}.masthead{border-bottom:1px solid #b6c8d2;background:#f8fbfc}.mast-inner{max-width:1320px;padding:13px 24px;display:flex;justify-content:space-between;gap:14px;align-items:center;margin:auto;font-size:11px;letter-spacing:.11em;text-transform:uppercase;font-weight:750;color:#466071}.mast-inner span:last-child{text-align:right}.intro{padding:34px 0 17px}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--teal);font-weight:800}.intro h1{font:700 clamp(28px,4.4vw,49px)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.028em;color:#16344c;margin:9px 0 12px}.intro p{max-width:920px;color:var(--muted);margin:0}.formula-hero{background:#17374e;color:#fff;border-radius:15px;padding:23px 28px;margin:19px 0 25px;box-shadow:0 9px 20px #183d5630;border-top:5px solid #4bb5bd}.formula-hero .kicker{color:#9de8e8}.hero-eq{font:500 clamp(28px,4.5vw,53px)/1.5 Georgia,"Times New Roman",serif;letter-spacing:.01em;margin:10px 0 8px;overflow-wrap:anywhere}.fraction{display:inline-flex;vertical-align:middle;flex-direction:column;align-items:center;font-size:.82em;line-height:1.05}.fraction>span:first-child{border-bottom:1.7px solid currentColor;padding:0 .24em .08em}.fraction>span:last-child{padding-top:.1em}.hero-legend{display:flex;flex-wrap:wrap;gap:4px 24px;font-size:12.5px;color:#d6eaf1}.hero-legend b{color:#95e8ec}.example{border-top:1px solid #46697f;margin-top:16px;padding-top:13px}.example small{display:block;color:#aac9d7;text-transform:uppercase;letter-spacing:.06em;font-size:10px;font-weight:800}.example strong{display:block;color:#99f4d7;font-size:clamp(14px,1.8vw,20px);font-weight:750;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;margin-top:3px}.sheet-section{margin-top:24px}.section-head{display:flex;gap:12px;align-items:baseline;border-bottom:2px solid #c7d6df;margin-bottom:14px;padding-bottom:7px}.section-head .num{font:700 13px Georgia,serif;color:#38718c}.section-head h2{font:700 23px Georgia,serif;margin:0}.section-head .sub{color:#688092;font-size:12px;margin-left:auto}.columns{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(315px,1fr);gap:16px}.panel{border:1px solid var(--line);background:#fff;border-radius:13px;overflow:hidden;box-shadow:0 2px 10px #102e4610}.panel-pad{padding:19px 21px}.panel h3{font:700 18px Georgia,serif;margin:0 0 10px}.panel p{margin:8px 0;color:#43576a}.stage{background:linear-gradient(160deg,#10283c,#081b2f);position:relative;overflow:hidden}.stage canvas{display:block;width:100%;height:475px;touch-action:none;cursor:grab;outline-offset:-5px}.stage canvas:active{cursor:grabbing}.stage-title{position:absolute;top:16px;left:18px;color:#deebf4;font-size:12px;text-transform:uppercase;letter-spacing:.09em;pointer-events:none;font-weight:750}.stage-help{position:absolute;top:14px;right:14px;color:#a4c3d7;font-size:11px;pointer-events:none}.stage-bar{background:#17334b;padding:12px 14px;display:flex;gap:7px;flex-wrap:wrap}.stage-bar button{color:#e4f1fa;background:#24516b;border:1px solid #42738e;border-radius:7px;padding:8px 10px;font-size:12px;font-weight:700}.stage-bar button.on,.stage-bar button:hover{background:#14677b}.stage-caption{padding:10px 15px;color:#b5d0dc;font-size:12px;background:#132d43;border-top:1px solid #35556c}.settings .heading{display:flex;justify-content:space-between;align-items:center;gap:9px}.settings .heading h3{margin:0}.seg{display:flex;gap:3px;background:#e5edf1;padding:3px;border-radius:8px}.seg button{border:0;border-radius:6px;background:transparent;color:#365369;font-size:11px;font-weight:750;padding:6px 9px}.seg button.on{background:#fff;color:#075e74;box-shadow:0 1px 3px #193f551e}.explainer{font-size:12px!important;color:#566e7f!important}.control{margin:19px 0 22px}.control .label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;font-weight:750}.control output{font-variant-numeric:tabular-nums;color:#08728c;font-weight:800;max-width:68%;text-align:right;overflow-wrap:anywhere}input[type=range]{width:100%;accent-color:#177f91;cursor:pointer;margin:10px 0 2px;height:16px}.rangeends{display:flex;justify-content:space-between;color:#758c9d;font-size:10px}.divider{border-top:1px solid var(--line);margin:16px 0}.smallhead{font-size:10px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;color:#53778a;margin:0 0 7px}.presets{display:flex;gap:7px;flex-wrap:wrap}.presets button,.plainbtn{border:1px solid #b8ced9;border-radius:7px;background:#f3f8fa;color:#205b76;padding:7px 9px;font-size:11.5px;font-weight:700}.presets button:hover,.plainbtn:hover{background:#dceef3}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:16px}.metric{border:1px solid var(--line);border-left:4px solid #438ea7;border-radius:9px;background:#fff;padding:12px 13px;overflow:hidden}.metric small{display:block;color:#60778b;font-size:11px}.metric strong{display:block;font-size:19px;color:#173e59;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;margin-top:4px}.metric.highlight{border-left-color:#13a08f;background:#f1fbf8}.metric.highlight strong{color:#006b63}.note{background:#eff7f9;border-left:3px solid #4394a5;padding:10px 13px;font-size:12.5px;color:#426275;border-radius:0 6px 6px 0}.theory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.formula-card{padding:19px 20px}.formula-card .cap{font-size:11px;font-weight:750;color:#2a7d92;text-transform:uppercase;letter-spacing:.07em}.mathline{font:500 clamp(18px,2vw,26px)/1.55 Georgia,"Times New Roman",serif;color:#143e55;padding:8px 0;overflow-wrap:anywhere}.formula-card p{font-size:13px}.formula-card .ref{font-size:11px;color:#70879a}.live{margin-top:7px;padding-top:8px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums;color:#087483;font-weight:700;font-size:13px;overflow-wrap:anywhere}.asym-grid{display:grid;grid-template-columns:310px minmax(0,1fr);gap:15px}.asym-options{padding:20px}.asym-options label{font-size:12px;color:#496276;font-weight:750;display:block;margin:12px 0 5px}.asym-options select{width:100%;padding:10px;border:1px solid #bed0dc;border-radius:7px;background:#fff;color:#173e59}.asym-options .factor{font:700 29px Georgia,serif;color:#146c7e;margin-top:6px}.asym-options .limitresult{color:#096e66;font-weight:800;font-size:16px}.asym-options .plainbtn{margin-top:12px;background:#1a637c;color:#fff;border-color:#1a637c}.chartbox{padding:19px 20px}.chartbox canvas{display:block;width:100%;height:260px}.chart-foot{font-size:12px;color:#6b7f8e;margin:8px 0 0}.table-wrap{overflow-x:auto}.data{border-collapse:collapse;width:100%;font-size:12.5px}.data th{background:#eaf3f7;color:#2d5669;text-align:left;font-weight:800}.data th,.data td{padding:9px 12px;border-bottom:1px solid #d6e2e8}.data td{font-variant-numeric:tabular-nums}.data tr:nth-child(even) td{background:#f7fafb}.proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.proof{padding:19px 20px}.proof h3{font-size:17px}.proof .mathline{font-size:18px}.proof p{font-size:12.7px}.proof p strong{color:#214d67}.refs{padding:22px 24px}.refs ol{padding-left:20px;margin:10px 0}.refs li{margin:10px 0;color:#3c5266;font-size:13px}.references .note{margin:12px 0}.footer{border-top:1px solid #bbcdd6;margin-top:27px;padding-top:13px;color:#698092;font-size:11.5px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+sup{font-size:10px}sup a{text-decoration:none}.mono{font-variant-numeric:tabular-nums}.hidden{display:none!important}
+[hidden]{display:none!important}
+/* Adjustable camera and uncluttered annotations */
+.zoom-hud{position:absolute;right:13px;top:67px;display:flex;flex-direction:column;gap:5px;z-index:2}
+.zoom-hud button{width:43px;height:43px;color:#eaf8ff;background:#0a2c43e8;border:1px solid #6a9aae;border-radius:9px;font:700 24px/1 system-ui;box-shadow:0 3px 10px #0006;touch-action:manipulation}
+.zoom-hud button:hover{background:#155b73}.zoom-hud .zoom-fit{font-size:13px}
+.measure-strip{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:11px 13px;background:#0d293e;border-top:1px solid #42677a}
+.measure-chip{font-size:12px;font-weight:700;background:#173c52;border:1px solid #37607b;border-radius:7px;padding:6px 9px;color:#dff5fc;white-space:nowrap;font-variant-numeric:tabular-nums}
+.measure-chip .key{width:7px;height:7px;border-radius:50%;margin-right:6px}
+.measure-strip-hint{color:#b0cfde;font-size:11px;margin-left:auto}
+.view-tools .measure-control{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;min-width:0}
+.view-tools .measure-control input{flex:1;min-width:65px;max-width:200px;margin:0;accent-color:#4fdad1}
+.view-tools .measure-control output{color:#a5ffee;min-width:40px;text-align:right}
+.view-tools .label-select{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;min-width:0}
+.view-tools .label-select select{background:#0b2d42;color:white;border:1px solid #588097;border-radius:6px;padding:7px 9px;min-width:120px;max-width:100%}
+.zoom-line{display:flex;align-items:center;gap:12px;color:#d6edf7;font-size:12px;font-weight:700;min-width:0}
+.zoom-line input{flex:1;min-width:75px;margin:0;accent-color:#45d1cb}
+.zoom-line output{min-width:48px;color:#a3ffee;text-align:right;font-variant-numeric:tabular-nums}
+/* Interactive arcball laboratory controls */
+.stage-help{max-width:220px;text-align:right;line-height:1.45}
+.view-tools{background:#102b42;border-top:1px solid #32536a;padding:12px 15px;color:#d7edf6;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;gap:13px 20px}
+.view-opacity{display:flex;align-items:center;gap:11px;min-width:0;font-size:12px;font-weight:720}
+.view-opacity input{flex:1;min-width:70px;max-width:240px;margin:0;accent-color:#4fdad1}
+.view-opacity output{color:#9df7ee;min-width:35px;text-align:right;font-variant-numeric:tabular-nums}
+.view-switches{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;align-items:center;justify-content:flex-end}
+.view-switches label{cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.view-switches input{accent-color:#27c6b4;width:15px;height:15px;margin:0}
+.view-legend{display:flex;flex-wrap:wrap;gap:5px 15px;padding:8px 15px;background:#0b2438;color:#c3dae6;font-size:11px;border-top:1px solid #27455d}
+.key{display:inline-block;width:12px;height:3px;vertical-align:middle;border-radius:2px;margin-right:5px}
+@media(max-width:1080px){.columns{grid-template-columns:1fr}.settings .panel-pad{display:block}.metrics{grid-template-columns:repeat(2,1fr)}.asym-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.wrap{padding:0 13px 30px}.mast-inner{padding:11px 13px;font-size:9px}.intro{padding:24px 0 13px}.intro h1{font-size:31px}.formula-hero{padding:17px 17px}.hero-eq{font-size:clamp(24px,7vw,36px)}.section-head .sub{display:none}.theory-grid,.proof-grid{grid-template-columns:1fr}.metrics{gap:8px}.metric{padding:10px}.metric strong{font-size:16px}.panel-pad{padding:16px}.stage canvas{height:400px}.view-tools{grid-template-columns:1fr}.stage-help{top:37px;left:18px;right:18px;text-align:left;max-width:none}.stage-title{top:13px}.view-switches{gap:8px 15px}.stage-help{font-size:10px;top:39px;left:18px;right:65px}.zoom-hud{right:9px;top:75px}.zoom-hud button{width:39px;height:39px}.measure-strip-hint{width:100%;margin:0}.label-select select{width:100%}.stage-bar{padding:10px}.stage-bar button{padding:7px 9px;font-size:11px}.stage-title{font-size:11px}.section-head h2{font-size:21px}.chartbox{padding:13px}.mathline{font-size:21px}}
+@media print{body{background:white}.wrap{max-width:100%;padding:0 8mm}.stage-bar,.zoom-hud,.view-tools,.settings,.presets,.asym-options .plainbtn{display:none!important}.columns{grid-template-columns:1fr 1fr}.stage canvas{height:330px}.panel{box-shadow:none;break-inside:avoid}.theory-grid,.proof-grid{grid-template-columns:repeat(2,1fr)}.formula-hero{background:#17374e!important;print-color-adjust:exact}.sheet-section{break-inside:avoid}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Child-friendly step-by-step learning controls */
+body{font-size:16px;background:#f2f6f8}
+.intro{padding:24px 0 12px}.intro h1{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:-.035em;font-weight:850}.intro p{font-size:16px;line-height:1.65;max-width:810px}
+.formula-hero{margin-top:15px;margin-bottom:22px}.hero-eq{font-weight:650}
+.section-head h2{font:800 clamp(21px,3vw,27px)/1.25 system-ui,-apple-system,"Segoe UI",sans-serif}
+.settings .panel-pad{padding:20px 22px}.step-heading{display:flex;align-items:flex-start;gap:12px;margin:2px 0 13px}.step-heading h3{font:800 21px/1.25 system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;color:#123c55}.step-heading p{font-size:13px;line-height:1.5;color:#526b7d;margin:5px 0 0}.step-circle{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:#157f90;color:white;font-weight:900;font-size:18px}.magnitude-heading{border-top:2px solid #e6edf0;padding-top:20px;margin-top:16px}.magnitude-heading .step-circle{background:#9459b2}.playground-heading{margin-top:19px}.playground-heading .step-circle{background:#bf7e26}
+.control-set{display:grid;grid-template-columns:1fr;gap:2px}.child-control{margin:6px 0 8px;background:#f5f9fb;border:1px solid #dfebef;border-radius:12px;padding:10px 12px 9px}.child-control .label{align-items:center}.child-control .label label{display:inline-flex;align-items:center;gap:7px;min-width:0;color:#203e51;font-size:14px}.child-control .label output{font-size:15px;font-weight:900;color:#125f73;max-width:60%}.child-control input[type=range]{height:24px;margin:9px 0 2px;touch-action:pan-y}.child-control .rangeends{font-size:11px}.param-dot{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none}.param-b{background:#e7a343}.param-a{background:#58b7d4}.param-h{background:#31bda5}.magnitude-control{background:#fcf9ff;border-color:#e8dff2}.magnitude-control input[type=range]{accent-color:#8851a8}.magnitude-control .label output{color:#77509b}.magnitude-tip{font-size:13px;color:#574170;background:#f4ecfb;border:1px solid #e8d9f4;border-radius:10px;padding:11px 12px;margin:7px 0 11px}.real-measure{font-size:12px;margin-top:4px;color:#6a6077}.real-measure strong{color:#57387e;font-size:13px;overflow-wrap:anywhere}.result-callout{background:#e5f7f1;border:1px solid #a8dfce;border-radius:13px;padding:13px 16px;margin-top:16px;display:flex;flex-direction:column;gap:1px}.result-callout span{font-size:13px;color:#22685f;font-weight:800}.result-callout strong{font-size:26px;color:#096d5e;overflow-wrap:anywhere;line-height:1.3}.result-callout small{font-size:12px;color:#356e62}.friendly-presets{gap:8px}.friendly-presets button{font-size:12px;min-height:40px;padding:8px 12px;background:#f1f8fb;border-radius:10px}.friendly-presets button:first-child{background:#eaf9f4;border-color:#b1ddcd}.kid-note{font-size:12px!important;color:#475e73!important;background:#edf6fb;padding:11px 12px;border-radius:9px;line-height:1.6}.extra-measure{border:1px solid #d9e5eb;border-radius:9px;margin-top:14px;padding:9px 12px}.extra-measure summary{cursor:pointer;font-weight:750;font-size:13px;color:#1e6079}.extra-measure .control{margin:8px 0}.stage-title{font-size:12px;letter-spacing:.02em}.stage canvas{height:465px}.stage-bar-simple{gap:7px}.stage-bar-simple button{min-height:40px;font-size:12px;flex:1 1 auto}.simple-view-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 16px;background:#143249;color:#def3fc;padding:14px 15px}.simple-view-controls label{font-size:12px;font-weight:800;display:flex;align-items:center;gap:8px;min-width:0}.simple-view-controls label input{min-width:40px;flex:1;accent-color:#53dbc9;margin:0}.simple-view-controls label output{min-width:38px;text-align:right;color:#a9ffe9}.simple-view-controls label:last-child{grid-column:1/-1}.simple-view-controls select{flex:1;min-width:0;padding:7px;color:white;background:#244a60;border:1px solid #608da5;border-radius:8px;font-size:12px}.more-tools{background:#102c42;color:#dff3fc;border-top:1px solid #345871}.more-tools summary{padding:11px 15px;cursor:pointer;font-size:12px;font-weight:750}.more-tools[open] summary{border-bottom:1px solid #345871}.more-tools-content{padding:13px 14px}.more-tools-content>label{display:flex;align-items:center;gap:10px;font-size:12px}.more-tools-content>label input{flex:1}.more-tools-content .view-switches{justify-content:flex-start;padding:14px 0}.more-tools-content .stage-bar{padding:8px 0}.zoom-hud button{min-width:43px;min-height:43px}.section-head .num{color:#3e7b91}.asym-options h3,.chartbox h3{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800}
+@media(max-width:700px){.intro h1{font-size:30px}.intro p{font-size:14px}.sheet-section{margin-top:20px}.simple-view-controls{grid-template-columns:1fr;gap:13px}.simple-view-controls label:last-child{grid-column:auto;display:block}.simple-view-controls select{width:100%;margin-top:5px}.stage canvas{height:370px}.stage-bar-simple button{flex:1 1 45%;min-height:42px;font-size:11px}.settings .panel-pad{padding:15px}.step-heading h3{font-size:19px}.child-control{padding:10px 12px}.measure-strip-hint{font-size:11px}.formula-hero{padding:17px}.hero-eq{font-size:clamp(24px,7vw,35px)}.section-head h2{font-size:22px}}
+@media print{.simple-view-controls,.more-tools{display:none!important}}
+
+
+.columns{align-items:start}.settings{overflow:visible}
+@media(min-width:1081px){.stage{position:sticky;top:12px;align-self:start}}
+.mobile-preview{display:none}
+.shape-insight{font-size:12px;color:#1b6257;border-top:1px solid #b7dfd2;margin-top:8px;padding-top:7px}
+@media(max-width:700px){.mobile-preview{display:flex;position:sticky;top:8px;z-index:5;align-items:center;gap:12px;margin:-6px 0 16px;border-radius:12px;background:#153850;border:2px solid #7cd6c6;padding:8px;box-shadow:0 4px 17px #112e4635;color:#e9fcff}.mobile-preview canvas{display:block;width:120px;height:91px;background:#10283c;border-radius:8px;flex:none}.mobile-preview>div{min-width:0;display:flex;flex-direction:column;gap:2px}.mobile-preview b{font-size:13px}.mobile-preview strong{color:#adf7d7;font-size:17px;overflow-wrap:anywhere;line-height:1.1}.mobile-preview small{font-size:11px;line-height:1.3;color:#c4e2ef}}
+</style>
+</head>
+<body>
+<div class="masthead"><div class="mast-inner"><span>Matemática em 3D · Aprenda brincando</span><span>Português do Brasil · Acesso gratuito</span></div></div>
+<div class="wrap">
+<header class="intro"><div class="kicker">Uma experiência interativa de matemática</div><h1>Vamos explorar um tronco de pirâmide?</h1><p>Mexa nas barras, gire a figura com o dedo e veja o <strong>volume mudar na hora</strong>. Depois, experimente números gigantes para descobrir como o volume cresce. Não precisa saber cálculo para começar!</p></header>
+<section class="formula-hero" aria-labelledby="hero-title"><div class="kicker" id="hero-title">A fórmula do volume — sempre à vista</div><div class="hero-eq">V = <span class="fraction"><span>h</span><span>3</span></span> (a² + ab + b²)</div><div class="hero-legend"><span><b>a</b> = lado do quadrado superior</span><span><b>b</b> = lado do quadrado inferior</span><span><b>h</b> = altura perpendicular</span><span><b>V</b> = volume em u³</span></div><div class="example"><small>Veja a fórmula usando os seus números</small><strong id="calculation" aria-live="polite">V = (6/3) (4² + 4·8 + 8²) = 224 u³</strong></div></section>
+<main>
+<section class="sheet-section" id="modelo"><div class="section-head"><span class="num">01</span><h2>Brinque com a figura</h2><span class="sub">Você controla o sólido!</span></div>
+<div class="columns"><div class="panel stage"><div class="stage-title">Gire a pirâmide com o dedo ↻</div><div class="stage-help">Arraste para girar · pinça para aproximar</div><canvas id="scene" tabindex="0" role="img" aria-label="Tronco de pirâmide giratório. Um dedo gira, dois dedos fazem zoom e movem a câmera. Os botões mais e menos permitem zoom. Medidas podem ficar fora do modelo ou ser arrastadas."></canvas>
+<div class="zoom-hud" role="group" aria-label="Controles de zoom da visualização"><button type="button" id="zoomIn" aria-label="Aproximar modelo">+</button><button type="button" id="zoomOut" aria-label="Afastar modelo">−</button><button type="button" id="zoomFit" class="zoom-fit" aria-label="Reenquadrar modelo">100%</button></div>
+<div class="measure-strip" id="measureStrip" aria-live="polite"><span class="measure-chip" id="tagH"><i class="key" style="background:#83f2d9"></i>h = 6 u</span><span class="measure-chip" id="tagA"><i class="key" style="background:#b5eaff"></i>a = 4 u</span><span class="measure-chip" id="tagB"><i class="key" style="background:#ffcf8e"></i>b = 8 u</span><span class="measure-chip" id="tagL"><i class="key" style="background:#91ffcd"></i>ℓ(z) = 6 u</span><span class="measure-chip" id="tagArea"><i class="key" style="background:#81ffcf"></i>A(z) = 36 u²</span><span class="measure-strip-hint">Medidas fora da figura para deixar a forma visível</span></div>
+<div class="simple-view-controls">
+<label for="opacity">Transparência da figura <input type="range" id="opacity" min="0" max="80" step="5" value="20"><output id="opacityOut">20%</output></label>
+<label for="measureAlpha">Visibilidade das medidas <input type="range" id="measureAlpha" min="0" max="100" step="5" value="65"><output id="measureAlphaOut">65%</output></label>
+<label for="labelMode">Onde mostrar os números?
+<select id="labelMode"><option value="outside">Embaixo da figura (sem atrapalhar)</option><option value="draggable">Na figura (posso arrastar)</option><option value="hidden">Esconder números</option></select></label>
+</div>
+<div class="stage-bar stage-bar-simple">
+<button id="resetBtn" type="button">↻ Vista normal</button>
+<button id="topViewBtn" type="button">⬆ Ver de cima</button>
+<button id="bottomViewBtn" type="button">⬇ Ver de baixo</button>
+<button id="flipBtn" type="button">⤵ Virar de cabeça para baixo</button>
+</div>
+<details class="more-tools"><summary>Mais opções de visualização</summary>
+<div class="more-tools-content"><label for="zoomRange">Zoom <input type="range" id="zoomRange" min="25" max="500" step="5" value="100"><output id="zoomOutValue">100%</output></label>
+<div class="view-switches"><label><input id="showMeasures" type="checkbox" checked> Linhas de medição</label><label><input id="showGrid" type="checkbox" checked> Grade de fundo</label></div>
+<div class="stage-bar"><button id="tipBtn" type="button">+ Reconstruir a ponta</button><button id="sliceBtn" type="button" class="on" aria-pressed="true">− Ocultar seção</button><button id="spinBtn" type="button">↻ Rotação automática</button><button id="pngBtn" type="button">Salvar imagem PNG</button></div></div>
+</details>
+<div class="view-legend"><span><i class="key" style="background:#80f6e3"></i> Eixo h interno</span><span><i class="key" style="background:#a9ecff"></i> Lado a superior</span><span><i class="key" style="background:#ffd08a"></i> Lado b inferior</span><span><i class="key" style="background:#83ffd6"></i> Seção A(z)</span></div><div class="stage-caption" id="sceneNote">As linhas mostram as medidas por dentro. Use + ou − para aproximar e afastar.</div></div>
+<div class="panel settings"><div class="panel-pad">
+<div class="mobile-preview" aria-label="Miniatura atualizada da pirâmide enquanto você ajusta as medidas">
+<canvas id="miniPreview" width="160" height="110" aria-hidden="true"></canvas>
+<div><b>Veja enquanto muda!</b><strong id="miniVolume">224 u³</strong><small>A figura muda junto com as barras.</small></div></div>
+<div class="step-heading"><span class="step-circle">1</span><div><h3>Escolha as medidas</h3><p>Cada barrinha anda <strong>de 1 em 1</strong>. Mova e veja a figura mudar!</p></div></div>
+<div class="control-set"><div class="control child-control"><div class="label"><label for="base"><span class="param-dot param-b"></span>Base de baixo <strong>(b)</strong></label><output id="baseOut">8</output></div><input id="base" type="range" min="0" max="100" step="1" value="8" aria-label="Base de baixo: medida inicial de 0 a 100"><div class="rangeends"><span>0</span><span>100</span></div></div>
+<div class="control child-control"><div class="label"><label for="top"><span class="param-dot param-a"></span>Base de cima <strong>(a)</strong></label><output id="topOut">4</output></div><input id="top" type="range" min="0" max="100" step="1" value="4" aria-label="Base de cima: medida inicial de 0 a 100"><div class="rangeends"><span>0</span><span>100</span></div></div>
+<div class="control child-control"><div class="label"><label for="height"><span class="param-dot param-h"></span>Altura <strong>(h)</strong></label><output id="heightOut">6</output></div><input id="height" type="range" min="1" max="100" step="1" value="6" aria-label="Altura: medida inicial de 1 a 100"><div class="rangeends"><span>1</span><span>100</span></div></div></div>
+<div class="step-heading magnitude-heading"><span class="step-circle">2</span><div><h3>Agora deixe tudo gigante!</h3><p>Estas três barras ficam <strong>sempre aqui</strong>. Cada passo para a direita multiplica a medida por <strong>10</strong>.</p></div></div>
+<div class="magnitude-tip">Exemplo: <strong>8 × 10³ = 8.000</strong>. Você pode aumentar a base, o topo e a altura <em>separadamente</em>.</div>
+<div class="control-set"><div class="control child-control magnitude-control"><div class="label"><label for="magBase"><span class="param-dot param-b"></span>Base de baixo <strong>(b)</strong></label><output id="magBaseOut">× 10⁰</output></div><input id="magBase" type="range" min="0" max="12" step="1" value="0" aria-label="Base de baixo: escala por potências de dez"><div class="rangeends"><span>10⁰ (1×)</span><span>10¹² (1 trilhão ×)</span></div><div class="real-measure">Tamanho final: <strong id="baseReal">8 u</strong></div></div>
+<div class="control child-control magnitude-control"><div class="label"><label for="magTop"><span class="param-dot param-a"></span>Base de cima <strong>(a)</strong></label><output id="magTopOut">× 10⁰</output></div><input id="magTop" type="range" min="0" max="12" step="1" value="0" aria-label="Base de cima: escala por potências de dez"><div class="rangeends"><span>10⁰ (1×)</span><span>10¹² (1 trilhão ×)</span></div><div class="real-measure">Tamanho final: <strong id="topReal">4 u</strong></div></div>
+<div class="control child-control magnitude-control"><div class="label"><label for="magHeight"><span class="param-dot param-h"></span>Altura <strong>(h)</strong></label><output id="magHeightOut">× 10⁰</output></div><input id="magHeight" type="range" min="0" max="12" step="1" value="0" aria-label="Altura: escala por potências de dez"><div class="rangeends"><span>10⁰ (1×)</span><span>10¹² (1 trilhão ×)</span></div><div class="real-measure">Tamanho final: <strong id="heightReal">6 u</strong></div></div></div>
+<div class="result-callout"><span>📦 Volume da figura</span><strong id="quickVolume">224 u³</strong><small>O volume mede quanto cabe dentro do sólido.</small><div id="shapeInsight" class="shape-insight">Tente mudar uma medida e observe o resultado!</div></div>
+<div class="step-heading playground-heading"><span class="step-circle">3</span><div><h3>Experimente estes exemplos</h3><p>Toque em um botão e observe o que acontece.</p></div></div>
+<div class="presets friendly-presets"><button data-preset="reset">↻ Recomeçar</button><button data-preset="prism">▣ Virar prisma</button><button data-preset="pyramid">△ Virar pirâmide</button><button data-preset="high">↑ Altura gigante</button><button data-preset="wideB">↔ Base gigante</button><button data-preset="wideA">↔ Topo gigante</button><button data-preset="uniform">✳ Tudo gigante</button></div>
+<details class="extra-measure"><summary>Quero ver uma fatia dentro da figura</summary><div class="control" id="sliceControl"><div class="label"><label for="slice">Altura da fatia</label><output id="sliceOut">50%</output></div><input id="slice" type="range" min="0" max="100" step="1" value="50"><div class="rangeends"><span>Embaixo (0%)</span><span>Em cima (100%)</span></div></div></details>
+<p class="kid-note">💡 O infinito não é um número que colocamos na barra: aqui exploramos valores cada vez maiores, e a matemática nos conta o que acontece quando eles crescem sem parar.</p>
+</div></div></div>
+<div class="metrics"><div class="metric highlight"><small>Volume · V</small><strong id="volume">224 u³</strong></div><div class="metric"><small>Área lateral · Aₗ</small><strong id="lateral">—</strong></div><div class="metric"><small>Área total · Aₜ</small><strong id="total">—</strong></div><div class="metric"><small>Geratriz · g</small><strong id="slant">—</strong></div></div><div class="note" style="margin-top:12px">Convenções: a, b ≥ 0 (não ambos nulos); h &gt; 0. Se a &gt; b, a abertura é maior na parte superior (tronco invertido). Quando a = b, temos um prisma. Valores grandes não mudam a fórmula; mudam a escala de exibição.</div>
+</section>
+<section class="sheet-section" id="formulas"><div class="section-head"><span class="num">02</span><h2>Mais fórmulas para descobrir</h2><span class="sub">Equações exatas · Resultados atualizados em tempo real</span></div><div class="theory-grid">
+<div class="panel formula-card"><div class="cap">Bases quadradas · [1]</div><div class="mathline">A<sub>sup</sub> = a² &nbsp;·&nbsp; A<sub>inf</sub> = b²</div><div class="mathline">P<sub>sup</sub> = 4a &nbsp;·&nbsp; P<sub>inf</sub> = 4b</div><p>Área e perímetro de cada quadrado paralelo.</p><div class="live" id="liveBases">—</div></div>
+<div class="panel formula-card"><div class="cap">Geratriz e aresta lateral · [1]</div><div class="mathline">g = √[h² + ((b − a)/2)²]</div><div class="mathline">e = √[h² + (b − a)²/2]</div><p>g é a altura inclinada de cada face trapezoidal; e liga dois vértices correspondentes.</p><div class="live" id="liveSlants">—</div></div>
+<div class="panel formula-card"><div class="cap">Áreas das faces · [1]</div><div class="mathline">A<sub>lat</sub> = ½(P<sub>inf</sub> + P<sub>sup</sub>)g</div><div class="mathline">A<sub>lat</sub> = 2(a + b)g</div><div class="mathline">A<sub>total</sub> = a² + b² + A<sub>lat</sub></div><div class="live" id="liveAreas">—</div></div>
+<div class="panel formula-card"><div class="cap">Volume em função das áreas · [1]</div><div class="mathline">V = (h/3)(A<sub>inf</sub> + A<sub>sup</sub> + √(A<sub>inf</sub>A<sub>sup</sub>))</div><p>Uma forma geral do volume de um tronco de pirâmide regular com bases semelhantes.</p><div class="live" id="liveGeneral">—</div></div>
+<div class="panel formula-card"><div class="cap">Teorema do prismatoide · [2]</div><div class="mathline">M = ((a + b)/2)²</div><div class="mathline">V = (h/6)(b² + 4M + a²)</div><p>M é a área da seção exatamente na metade da altura, z = h/2.</p><div class="live" id="liveMid">—</div></div>
+<div class="panel formula-card"><div class="cap">Centroide · [1]</div><div class="mathline">z̄ = h(b² + 2ab + 3a²) / [4(b² + ab + a²)]</div><p>Coordenada vertical do centroide do volume homogêneo, medida a partir da base inferior.</p><div class="live" id="liveCentroid">—</div></div>
+</div></section>
+<section class="sheet-section" id="limites"><div class="section-head"><span class="num">03</span><h2>O que acontece quando fica enorme?</h2><span class="sub">λ = 10ᵏ · k inteiro · 0 ≤ k ≤ 12</span></div><div class="asym-grid"><div class="panel asym-options"><h3>Faça uma medida crescer</h3><p class="explainer">Neste experimento, partimos de (a₀, b₀, h₀) = (4, 8, 6) e multiplicamos as medidas selecionadas por λ = 10ᵏ.</p><label for="path">Qual medida você quer aumentar?</label><select id="path"><option value="height">Somente h → +∞</option><option value="lower">Somente b → +∞</option><option value="upper">Somente a → +∞</option><option value="uniform">Todas as dimensões → +∞</option></select><label for="exp">Quantas vezes multiplicar por 10?</label><input id="exp" type="range" min="0" max="12" value="4" step="1"><div class="rangeends"><span>10⁰</span><span>10¹²</span></div><div class="factor" id="factor">λ = 10⁴</div><p class="explainer" id="pathDimensions">—</p><p class="limitresult" id="pathVolume">—</p><p class="explainer" id="growthDescription">—</p><button class="plainbtn" id="applyPath">Ver este exemplo na figura 3D</button></div><div class="panel chartbox"><h3>Volume versus fator de escala</h3><p class="explainer">Gráfico em eixos logarítmicos: cada intervalo horizontal equivale a multiplicar λ por 10. A inclinação da curva revela o expoente do crescimento.</p><canvas id="chart" role="img" aria-label="Gráfico logarítmico do volume em função da escala lambda para quatro trajetórias matemáticas possíveis"></canvas><div class="chart-foot" id="slopeNote">—</div></div></div><div class="panel" style="margin-top:15px"><div class="table-wrap"><table class="data"><thead><tr><th>Fator λ</th><th>a (superior)</th><th>b (inferior)</th><th>h (altura)</th><th>V (u³)</th></tr></thead><tbody id="asymRows"></tbody></table></div></div><div class="note" style="margin-top:12px"><strong>Conceito central:</strong> a tela não contém ∞ como uma dimensão geométrica. Ela avalia uma sequência de medidas finitas e indica o limite analítico correspondente. A renderização do modelo é normalizada para preservar sua visibilidade, portanto seu tamanho em pixels não representa a escala absoluta.</div></section>
+<section class="sheet-section" id="deducoes"><div class="section-head"><span class="num">04</span><h2>Por que a fórmula funciona?</h2></div><div class="proof-grid"><article class="panel proof"><h3>I. Integração de seções quadradas</h3><p>Para 0 ≤ z ≤ h, o lado da seção muda linearmente. O volume é a integral da sua área. <a href="#referencias">[3]</a></p><div class="mathline">ℓ(z) = b + (a − b)z/h</div><div class="mathline">A(z) = [ℓ(z)]²</div><div class="mathline">V = ∫₀ʰ A(z) dz</div><div class="mathline">= h(a² + ab + b²)/3</div><p id="sliceNote">Ative «Ver seção transversal» para destacar uma fatia no modelo.</p></article>
+<article class="panel proof"><h3>II. Pirâmide maior menos a ponta</h3><p>Quando a ≠ b, a semelhança das pirâmides fornece as alturas das duas pirâmides, e o volume resulta da diferença. <a href="#referencias">[1], [3]</a></p><div class="mathline" id="similarityEquation">H = bh/(b − a)</div><p id="similarityDetail">—</p></article>
+<article class="panel proof"><h3>III. Teorema do prismatoide</h3><p>O frustum é um prismatoide com área média da seção intermediária M. <a href="#referencias">[2]</a></p><div class="mathline">M = (a + b)²/4</div><div class="mathline">V = (h/6)(b² + 4M + a²)</div><div class="mathline">= h(a² + ab + b²)/3</div><p>As três expressões resultam no mesmo volume para qualquer a, b ≥ 0 e h &gt; 0, exceto o caso degenerado a = b = 0.</p></article></div></section>
+<section class="sheet-section" id="conclusoes"><div class="section-head"><span class="num">05</span><h2>O que muda em cada caso?</h2></div><div class="panel"><div class="table-wrap"><table class="data"><thead><tr><th>Hipótese</th><th>Comportamento matemático</th><th>Interpretação</th></tr></thead><tbody>
+<tr><td>a → 0, b e h fixos</td><td>V → hb²/3</td><td>Pirâmide quadrangular completa</td></tr>
+<tr><td>a → b, b e h fixos</td><td>V → b²h</td><td>Prisma quadrangular</td></tr>
+<tr><td>h → 0⁺, a e b fixos</td><td>V → 0</td><td>Corpo colapsa em altura</td></tr>
+<tr><td>h → +∞, a e b fixos</td><td>V/h = (a² + ab + b²)/3</td><td>Crescimento <b>linear</b></td></tr>
+<tr><td>b → +∞, a e h fixos</td><td>V/b² → h/3</td><td>Crescimento <b>quadrático</b></td></tr>
+<tr><td>a → +∞, b e h fixos</td><td>V/a² → h/3</td><td>Crescimento <b>quadrático</b></td></tr>
+<tr><td>(a,b,h) → (λa,λb,λh), λ → +∞</td><td>V(λ) = λ³V(1)</td><td>Crescimento <b>cúbico</b></td></tr>
+<tr><td>Ampliação uniforme por λ</td><td>A<sub>total</sub>(λ) = λ²A<sub>total</sub>(1)</td><td>Áreas crescem quadraticamente</td></tr>
+<tr><td>Ampliação uniforme por λ</td><td>A<sub>total</sub>(λ)/V(λ) = [A<sub>total</sub>(1)/V(1)]/λ</td><td>Razão superfície/volume diminui</td></tr>
+</tbody></table></div></div><p class="explainer">Estas relações são consequências algébricas das fórmulas do volume e das áreas em [1] e da definição de limite. Não implicam um sólido físico com comprimento infinito nem um gráfico 3D infinito.</p></section>
+<section class="sheet-section references" id="referencias"><div class="section-head"><span class="num">06</span><h2>De onde vêm as fórmulas?</h2></div><div class="panel refs"><p>As fórmulas foram confrontadas com referências abertas de matemática. Derivações, exemplos numéricos e análises de limites foram preparados para este simulador.</p><ol>
+<li><strong>WEISSTEIN, Eric W.</strong> <em>Pyramidal Frustum</em>. Wolfram MathWorld. Fórmulas de volume, área lateral, geratriz, aresta lateral e centroide. Disponível em: <a href="https://mathworld.wolfram.com/PyramidalFrustum.html" target="_blank" rel="noopener noreferrer">mathworld.wolfram.com/PyramidalFrustum.html</a>. Acesso em: 22 nov. 2026.</li>
+<li><strong>WEISSTEIN, Eric W.</strong> <em>Prismatoid</em>. Wolfram MathWorld. Teorema do prismatoide, V = h(A₁ + 4M + A₂)/6. Disponível em: <a href="https://mathworld.wolfram.com/Prismatoid.html" target="_blank" rel="noopener noreferrer">mathworld.wolfram.com/Prismatoid.html</a>. Acesso em: 22 nov. 2026.</li>
+<li><strong>OPENSTAX.</strong> <em>Calculus, Volume 2</em>, seção 2.2: Determining Volumes by Slicing. Método de integração por seções e volume de pirâmides. Disponível em: <a href="https://openstax.org/books/calculus-volume-2/pages/2-2-determining-volumes-by-slicing" target="_blank" rel="noopener noreferrer">openstax.org/books/calculus-volume-2/pages/2-2-determining-volumes-by-slicing</a>. Acesso em: 22 nov. 2026.</li>
+<li><strong>WEISSTEIN, Eric W.</strong> <em>Truncated Square Pyramid</em>. Wolfram MathWorld. Fórmula específica do volume e contexto histórico. Disponível em: <a href="https://mathworld.wolfram.com/TruncatedSquarePyramid.html" target="_blank" rel="noopener noreferrer">mathworld.wolfram.com/TruncatedSquarePyramid.html</a>. Acesso em: 22 nov. 2026.</li>
+</ol><div class="note"><strong>Nota metodológica:</strong> os comprimentos são expressos em unidades abstratas u; áreas, em u²; volumes, em u³. Valores acima de 10¹⁰ são mostrados aproximadamente com quatro algarismos significativos. O cálculo interno utiliza números de ponto flutuante do navegador. O arredondamento da exibição não altera as identidades matemáticas.</div><p class="explainer">Licença do material didático interativo: utilização e compartilhamento educacional permitidos. O arquivo HTML pode ser aberto localmente sem conexão à internet. Os hiperlinks bibliográficos exigem internet apenas se forem visitados.</p></div></section>
+</main><footer class="footer"><span>Geometria espacial · Tronco de pirâmide quadrangular · Simulação e análise assintótica</span><span>Modelo pedagógico · Atualizado em 22 nov. 2026 · Português (Brasil)</span></footer>
+</div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id), canvas=$('scene'), ctx=canvas.getContext('2d'), graph=$('chart'),gctx=graph.getContext('2d'),mini=$('miniPreview'),miniCtx=mini.getContext('2d');
+const NF=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}), NI=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});
+// Quaternion arcball camera: unrestricted 3D orientation, no pitch clamp / gimbal lock.
+function qmul(a,b){return [a[0]*b[0]-a[1]*b[1]-a[2]*b[2]-a[3]*b[3],a[0]*b[1]+a[1]*b[0]+a[2]*b[3]-a[3]*b[2],a[0]*b[2]-a[1]*b[3]+a[2]*b[0]+a[3]*b[1],a[0]*b[3]+a[1]*b[2]-a[2]*b[1]+a[3]*b[0]]}
+function qnorm(q){const n=Math.hypot(...q);return q.map(v=>v/n)}
+function axisAngle(v,a){const f=Math.sin(a/2);return [Math.cos(a/2),v[0]*f,v[1]*f,v[2]*f]}
+function homeQ(){return qnorm(qmul(axisAngle([1,0,0],.5),axisAngle([0,1,0],.72)))}
+function qrotate(q,v){const [w,x,y,z]=q;const u=[x,y,z], t=[2*(y*v[2]-z*v[1]),2*(z*v[0]-x*v[2]),2*(x*v[1]-y*v[0])];return [v[0]+w*t[0]+y*t[2]-z*t[1],v[1]+w*t[1]+z*t[0]-x*t[2],v[2]+w*t[2]+x*t[1]-y*t[0]]}
+function arcball(x,y){const r=canvas.getBoundingClientRect(),d=Math.min(r.width,r.height)*.94;let px=2*(x-r.left-r.width/2)/d,py=2*(r.top+r.height/2-y)/d,n=px*px+py*py;if(n>1){const m=Math.sqrt(n);px/=m;py/=m;return [px,py,0]}return [px,py,Math.sqrt(1-n)]}
+function qbetween(v0,v1){const dot=v0[0]*v1[0]+v0[1]*v1[1]+v0[2]*v1[2];if(dot < -0.99999){const perpendicular=Math.abs(v0[0])<.9?[1,0,0]:[0,1,0];let a=[v0[1]*perpendicular[2]-v0[2]*perpendicular[1],v0[2]*perpendicular[0]-v0[0]*perpendicular[2],v0[0]*perpendicular[1]-v0[1]*perpendicular[0]];const l=Math.hypot(...a);return [0,...a.map(x=>x/l)]}return qnorm([1+dot,v0[1]*v1[2]-v0[2]*v1[1],v0[2]*v1[0]-v0[0]*v1[2],v0[0]*v1[1]-v0[1]*v1[0]])}
+const s={a:4,b:8,h:6,section:true,tip:false,spin:false,zoom:1,opacity:20,measureAlpha:65,labelMode:'outside',measures:true,grid:true,panX:0,panY:0,q:homeQ()};
+// Dragged label coordinates are viewport-relative so they survive resizing.
+let labelOffsets={},labelHitboxes=[],activeLabel=null;
+function setZoom(z){s.zoom=Math.min(5,Math.max(.25,z));const percent=Math.round(s.zoom*100);$('zoomRange').value=String(Math.round(percent/5)*5);put('zoomOutValue',percent+'%');render3d()}
+function updateMeasureStrip(){const z=Number($('slice').value)/100*s.h,side=s.b+(s.a-s.b)*z/s.h;const chip=(id,value)=>{const el=$(id),node=[...el.childNodes].find(n=>n.nodeType===3);if(node)node.textContent=' '+value;else el.append(document.createTextNode(' '+value))};chip('tagH','h = '+fmtInt(s.h)+' u');chip('tagA','a = '+fmtInt(s.a)+' u');chip('tagB','b = '+fmtInt(s.b)+' u');chip('tagL','ℓ(z) = '+fmt(side)+' u');chip('tagArea','A(z) = '+fmt(side**2)+' u²');$('tagL').hidden=!s.section;$('tagArea').hidden=!s.section;$('measureStrip').hidden=s.labelMode!=='outside'}
+function fmt(n){if(!Number.isFinite(n))return 'indefinido';if(n===0)return '0';const abs=Math.abs(n);if(abs>=1e10||abs<0.0001){let e=Math.floor(Math.log10(abs));let m=n/10**e;if(Math.abs(m)>=9.9995){m/=10;e++}return NF.format(Number(m.toPrecision(4)))+' × 10'+sup(e)}return NF.format(Number(n.toPrecision(9)))}
+function sup(num){const table={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻'};return String(num).split('').map(c=>table[c]||c).join('')}
+function fmtInt(n){return n>=1e10?fmt(n):NI.format(n)}
+function put(id,v){$(id).textContent=v}
+function volume(a,b,h){return h*(a*a+a*b+b*b)/3}
+function geometry(){const {a,b,h}=s,g=Math.hypot(h,(b-a)/2),edge=Math.hypot(h,(b-a)/Math.SQRT2),mid=((a+b)/2)**2;return {g,edge,mid,v:volume(a,b,h),lateral:2*(a+b)*g,total:a*a+b*b+2*(a+b)*g,centroid:h*(b*b+2*a*b+3*a*a)/(4*(b*b+a*b+a*a))}}
+function setDims(a,b,h){
+ const vals={base:b,top:a,height:h};
+ for(const [key,v] of Object.entries(vals)){
+  let exp=0,step=v;
+  if(v>100){exp=Math.min(12,Math.floor(Math.log10(v)));step=Math.round(v/10**exp)}
+  if(step>100){exp=Math.min(12,exp+1);step=Math.round(v/10**exp)}
+  $(key).value=String(Math.min(100,Math.max(key==='height'?1:0,step)));
+  $('mag'+key.charAt(0).toUpperCase()+key.slice(1)).value=String(exp);
+ }
+ update();
+}
+function update(){for(const [id,key] of [['base','b'],['top','a'],['height','h']])s[key]=Number($(id).value)*10**Number($('mag'+id.charAt(0).toUpperCase()+id.slice(1)).value);
+if(s.a===0&&s.b===0){s.b=1;$('base').value='1';$('magBase').value='0'}
+const {a,b,h}=s,G=geometry(),zpct=+$('slice').value,secSide=b+(a-b)*zpct/100;
+for(const [id,actual] of [['base',b],['top',a],['height',h]]){
+  const exponent=Number($('mag'+id.charAt(0).toUpperCase()+id.slice(1)).value);
+  put(id+'Out',fmtInt(Number($(id).value)));
+  put('mag'+id.charAt(0).toUpperCase()+id.slice(1)+'Out','× 10'+sup(exponent));
+  put(id+'Real',fmtInt(actual)+' u');
+ }
+ put('quickVolume',fmt(G.v)+' u³');put('miniVolume',fmt(G.v)+' u³');
+ let message='Ajuste uma das barras e compare com o volume!';
+ if(a===b)message='Os dois quadrados são iguais: agora é um prisma!';
+ else if(a===0||b===0)message='Um quadrado virou um ponto: agora é uma pirâmide!';
+ else if(Math.max(a,b,h)/Math.max(1,Math.min(...[a,b,h].filter(x=>x>0)))>1e5)message='Uma medida é gigantesca perto das outras; a figura fica muito fina ou alongada!';
+ else if(["magBase","magTop","magHeight"].some(id=>Number($(id).value)>0))message='Você está usando potências de 10! Compare o volume antes e depois.';
+ put('shapeInsight',message);
+ put('sliceOut',zpct+'% · z = '+fmt(zpct*h/100)+' u');put('calculation',`V = (${fmtInt(h)}/3) × (${fmtInt(a)}² + ${fmtInt(a)}·${fmtInt(b)} + ${fmtInt(b)}²) = ${fmt(G.v)} u³`);
+put('volume',fmt(G.v)+' u³');put('lateral',fmt(G.lateral)+' u²');put('total',fmt(G.total)+' u²');put('slant',fmt(G.g)+' u');
+put('liveBases',`Aₛ = ${fmt(a*a)} u² · Aᵢ = ${fmt(b*b)} u² · Pₛ = ${fmt(4*a)} u · Pᵢ = ${fmt(4*b)} u`);
+put('liveSlants',`g = ${fmt(G.g)} u · e = ${fmt(G.edge)} u`);put('liveAreas',`Aₗ = ${fmt(G.lateral)} u² · Aₜ = ${fmt(G.total)} u²`);put('liveGeneral',`V = ${fmt(G.v)} u³`);put('liveMid',`M = ${fmt(G.mid)} u² · V = ${fmt(G.v)} u³`);put('liveCentroid',`z̄ = ${fmt(G.centroid)} u acima da base inferior`);
+put('sliceNote',s.section?`Para z = ${fmt(h*zpct/100)} u (${zpct}% da altura), ℓ(z) = ${fmt(secSide)} u e A(z) = ${fmt(secSide*secSide)} u².`:'Ative «Ver seção transversal» para destacar uma fatia no modelo.');
+if(a===b){put('similarityEquation','a = b ⇒ V = b²h');put('similarityDetail','O sólido é um prisma: não existe vértice finito da pirâmide original. A construção por subtração não é necessária.');}
+else {let large=Math.max(a,b),small=Math.min(a,b),H=large*h/(large-small),t=small*h/(large-small);put('similarityEquation',`H = ${fmt(large)}·${fmt(h)}/(${fmt(large)} − ${fmt(small)}) = ${fmt(H)} u`);put('similarityDetail',`Pirâmide maior com lado ${fmt(large)} u e altura H = ${fmt(H)} u; ponta removida com lado ${fmt(small)} u e altura t = ${fmt(t)} u. Logo, V = [(${fmt(large)})²·H − (${fmt(small)})²·t]/3 = ${fmt(G.v)} u³. ${a>b?'A ponta fica abaixo da base inferior (tronco invertido).':'A ponta fica acima da base superior.'}`)}
+updateMeasureStrip();render3d();}
+// Geometry rendering uses a normalized coordinate system and never iterates up to a physical dimension.
+let W=0,HH=0,dpr=1;
+function resizeCanvas(c,context,height){const rect=c.getBoundingClientRect(),r=Math.min(window.devicePixelRatio||1,2);c.width=Math.max(1,Math.round(rect.width*r));c.height=Math.round(height*r);context.setTransform(r,0,0,r,0,0);return [rect.width,height]}
+function resize(){[W,HH]=resizeCanvas(canvas,ctx,canvas.getBoundingClientRect().height);resizeCanvas(graph,gctx,graph.getBoundingClientRect().height);render3d();renderChart()}
+function coords(side,z){const r=side/2;return[[-r,z,-r],[r,z,-r],[r,z,r],[-r,z,r]]}
+function makeFrame(){const {a,b,h}=s,m=Math.max(a,b,h,1);let extra=null;if(s.tip&&a!==b){let apexY=b>a?h+a*h/(b-a):-b*h/(a-b);if(Math.abs(apexY)/m<=7)extra=apexY}const ymin=Math.min(0,extra??0),ymax=Math.max(h,extra??h),ycenter=(ymin+ymax)*.5;return{m,extra,ycenter:ycenter/m,scale:Math.min(W/(2.9*Math.max(a,b)/m+.7),HH/(1.95*(ymax-ymin)/m+1.2))*s.zoom,cx:W*.5+s.panX,cy:HH*.53+s.panY}}
+function view(p,F){const v=qrotate(s.q,[p[0]/F.m,p[1]/F.m-F.ycenter,p[2]/F.m]);return{x:F.cx+v[0]*F.scale,y:F.cy-v[1]*F.scale,z:v[2]}}
+function drawLine(a,b,color='#37566e',width=1,dash=[]){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([])}
+function disk(p,r,color){ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
+function poly(a,fill,stroke=null,dash=[]){ctx.beginPath();ctx.moveTo(a[0].x,a[0].y);for(let i=1;i<a.length;i++)ctx.lineTo(a[i].x,a[i].y);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1.45;ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([])}}
+function badge(text,x,y,color='#d9f6ff',key=null){
+ if(s.labelMode!=='draggable')return;
+ ctx.font='700 11px system-ui';const width=ctx.measureText(text).width;
+ if(key){if(!labelOffsets[key])labelOffsets[key]={x:x/Math.max(1,W),y:y/Math.max(1,HH)};
+ x=labelOffsets[key].x*W;y=labelOffsets[key].y*HH;}
+ x=Math.max(8,Math.min(W-width-13,x));y=Math.max(65,Math.min(HH-16,y));
+ if(key){labelHitboxes.push({key,x:x-7,y:y-20,w:width+14,h:27});}
+ ctx.save();ctx.globalAlpha=s.measureAlpha/100;
+ ctx.fillStyle='rgba(4,24,39,.88)';ctx.beginPath();ctx.roundRect(x-6,y-17,width+12,24,6);ctx.fill();ctx.fillStyle=color;ctx.fillText(text,x,y);
+ ctx.restore();}
+function drawAxisMarker(){// Fixed screen-space coordinate axes show which way the model faces.
+const center={x:W-45,y:HH-46},scale=23;
+for(const [name,dir,color] of [['x',[1,0,0],'#e4a1a5'],['y',[0,1,0],'#8cf1d6'],['z',[0,0,1],'#aed5ff']]){const r=qrotate(s.q,dir),end={x:center.x+r[0]*scale,y:center.y-r[1]*scale};drawLine(center,end,color,2);ctx.font='700 11px system-ui';ctx.fillStyle=color;ctx.fillText(name,end.x+3,end.y-3)}
+}
+function render3d(){if(!W||!HH)return;ctx.clearRect(0,0,W,HH);labelHitboxes=[];
+const {a,b,h}=s,F=makeFrame(),bn=coords(b,0),tn=coords(a,h),B=bn.map(p=>view(p,F)),T=tn.map(p=>view(p,F));
+const bCenter=view([0,0,0],F),tCenter=view([0,h,0],F);
+// Optional subtle ground grid; keep it behind the geometry even when viewing from below.
+if(s.grid){const wide=Math.max(a,b,h);for(let k=-4;k<=4;k++){const j=k*wide/4,lo=-wide,hi=wide,off=-.006*wide;drawLine(view([lo,off,j],F),view([hi,off,j],F),'#35577066',.8);drawLine(view([j,off,lo],F),view([j,off,hi],F),'#35577066',.8)}}
+const alpha=s.opacity/100;const faces=[{q:B,color:[251,190,100]},{q:T,color:[69,205,234]}];
+for(let i=0;i<4;i++)faces.push({q:[B[i],B[(i+1)%4],T[(i+1)%4],T[i]],color:i%2?[68,173,224]:[46,125,206]});
+faces.sort((f,g)=>f.q.reduce((v,p)=>v+p.z,0)/f.q.length-g.q.reduce((v,p)=>v+p.z,0)/g.q.length);
+for(const f of faces)poly(f.q,`rgba(${f.color.join(',')},${alpha})`);
+// Section plane is INSIDE the shape; the face translucency allows it to be seen.
+let sectionLabel=null;
+if(s.section){const z=Number($('slice').value)/100*h,ss=b+(a-b)*z/h,S=coords(ss,z).map(p=>view(p,F)),center=view([0,z,0],F);poly(S,'rgba(65,250,176,.22)');ctx.save();ctx.globalAlpha=s.measureAlpha/100;for(let i=0;i<4;i++)drawLine(S[i],S[(i+1)%4],'#77f8d2',1.6,[5,3]);ctx.restore();sectionLabel={center,ss,z};}
+// Distinct outside and rear edges, all retained even when a face is translucent.
+for(let i=0;i<4;i++){drawLine(B[i],B[(i+1)%4],'#ffcf82',1.9);drawLine(T[i],T[(i+1)%4],'#b4eeff',1.9);drawLine(B[i],T[i],'#9dcfe7',1.65)}
+let tipText='';if(s.tip){if(a===b)tipText='Prisma: vértice da pirâmide original no limite infinito.';else if(F.extra===null)tipText='Ponta não desenhada: muito distante nesta escala; fórmula continua válida.';else {const apex=view([0,F.extra,0],F),rim=b>a?T:B;let ft=[];for(let i=0;i<4;i++)ft.push({q:[rim[i],rim[(i+1)%4],apex]});ft.sort((f,g)=>f.q.reduce((v,p)=>v+p.z,0)-g.q.reduce((v,p)=>v+p.z,0));for(const f of ft){poly(f.q,'rgba(192,153,255,.07)');drawLine(f.q[0],f.q[2],'#dac5ff',1.2,[5,5]);drawLine(f.q[1],f.q[2],'#dac5ff',1.2,[5,5])}badge('ponta removida',apex.x+12,apex.y-5,'#e9d5ff','tip');tipText=a>b?'A ponta prolongada fica abaixo da base inferior.':'A ponta removida fica acima da base superior.'}}
+if(s.measures){
+ ctx.save();ctx.globalAlpha=s.measureAlpha/100;
+ // TRUE perpendicular height: between the centers of the two square faces.
+ drawLine(bCenter,tCenter,'#94ffdf',3,[8,5]);disk(bCenter,4,'#9bffe2');disk(tCenter,4,'#9bffe2');
+ const mid=view([0,h*.52,0],F),ll=Math.hypot(tCenter.x-bCenter.x,tCenter.y-bCenter.y),shift=ll<36?29:18;
+ ctx.restore();badge('h = '+fmtInt(h)+' u',mid.x+shift,mid.y-8,'#c3ffe9','h');ctx.save();ctx.globalAlpha=s.measureAlpha/100;
+ // A small right angle at the foot of the height vector (when projection allows).
+ const side=view([Math.max(b,h)*.105,0,0],F);const A={x:bCenter.x+(side.x-bCenter.x)*.42,y:bCenter.y+(side.y-bCenter.y)*.42};
+ const v={x:tCenter.x-bCenter.x,y:tCenter.y-bCenter.y},vl=Math.hypot(v.x,v.y);if(vl>15){const u={x:v.x/vl*10,y:v.y/vl*10};drawLine(A,{x:A.x+u.x,y:A.y+u.y},'#b3ffe9',1.15);drawLine({x:A.x+u.x,y:A.y+u.y},{x:bCenter.x+u.x,y:bCenter.y+u.y},'#b3ffe9',1.15)}
+ // Side lengths measured along actual front/back square edges, not floating labels.
+ const up=[T[2],T[3]],down=[B[2],B[3]];
+ const midTop={x:(up[0].x+up[1].x)/2,y:(up[0].y+up[1].y)/2},midBase={x:(down[0].x+down[1].x)/2,y:(down[0].y+down[1].y)/2};
+ drawLine(up[0],up[1],'#a9edff',3);drawLine(down[0],down[1],'#ffd18f',3);
+ ctx.restore();badge('a = '+fmtInt(a)+' u',midTop.x-35,midTop.y-17,'#baedff','a');badge('b = '+fmtInt(b)+' u',midBase.x-35,midBase.y+24,'#ffe1b0','b');ctx.save();ctx.globalAlpha=s.measureAlpha/100;
+ ctx.restore();if(sectionLabel){badge('A(z) = '+fmt(sectionLabel.ss**2)+' u²',sectionLabel.center.x+17,sectionLabel.center.y+27,'#acffdb','area');badge('ℓ(z) = '+fmt(sectionLabel.ss)+' u',sectionLabel.center.x+17,sectionLabel.center.y+4,'#b9ffeb','ell')}
+}else if(sectionLabel){badge('A(z) = '+fmt(sectionLabel.ss**2)+' u²',sectionLabel.center.x+17,sectionLabel.center.y+5,'#aeffe0','area')}
+ drawAxisMarker();
+ put('sceneNote',(tipText?tipText+' ':'')+'Arraste para girar. Use os botões + e − ou dois dedos para aproximar e afastar. Ajuste a transparência ou mova os nomes das medidas.');
+ renderMini();
+}
+function renderMini(){
+ const w=160,h=110;mini.width=w;mini.height=h;
+ miniCtx.fillStyle='#10283c';miniCtx.fillRect(0,0,w,h);
+ if(!W||!HH)return;
+ const srcX=canvas.width*.22,srcY=canvas.height*.17,srcW=canvas.width*.56,srcH=canvas.height*.67;
+ miniCtx.drawImage(canvas,srcX,srcY,srcW,srcH,0,0,w,h);
+}
+
+let tracking=new Map();
+function localPointer(e){const r=canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top,clientX:e.clientX,clientY:e.clientY}}
+function pinchInfo(){const a=[...tracking.values()];if(a.length<2)return null;return {dist:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),cx:(a[0].x+a[1].x)/2,cy:(a[0].y+a[1].y)/2}}
+let wasPinching=false;
+canvas.addEventListener('pointerdown',e=>{
+ if(e.button!==0&&e.pointerType==='mouse')return;
+ e.preventDefault();canvas.setPointerCapture(e.pointerId);
+ const point=localPointer(e);
+ if(tracking.size===0&&s.labelMode==='draggable'&&s.measureAlpha>0){
+  const hit=labelHitboxes.slice().reverse().find(r=>point.x>=r.x&&point.x<=r.x+r.w&&point.y>=r.y&&point.y<=r.y+r.h);
+  if(hit){activeLabel={key:hit.key,pointer:e.pointerId};}
+ }
+ tracking.set(e.pointerId,point);if(tracking.size>=2){wasPinching=true;activeLabel=null;}
+});
+canvas.addEventListener('pointermove',e=>{
+ if(!tracking.has(e.pointerId))return;e.preventDefault();
+ const prev=tracking.get(e.pointerId),before=pinchInfo(),next=localPointer(e);
+ tracking.set(e.pointerId,next);
+ if(tracking.size>=2){const after=pinchInfo();if(before&&after&&before.dist>1){s.zoom=Math.max(.25,Math.min(5,s.zoom*after.dist/before.dist));s.panX+=after.cx-before.cx;s.panY+=after.cy-before.cy;$('zoomRange').value=String(Math.round(s.zoom*20)*5);put('zoomOutValue',Math.round(s.zoom*100)+'%');}render3d();return;}
+ if(activeLabel&&activeLabel.pointer===e.pointerId){const label=labelOffsets[activeLabel.key];if(label){label.x+=(next.x-prev.x)/W;label.y+=(next.y-prev.y)/HH;}render3d();return;}
+ if(wasPinching)return;
+ const ra=arcball(prev.clientX,prev.clientY),rb=arcball(next.clientX,next.clientY);s.q=qnorm(qmul(qbetween(ra,rb),s.q));render3d();
+});
+for(const ev of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(ev,e=>{tracking.delete(e.pointerId);if(activeLabel?.pointer===e.pointerId)activeLabel=null;if(tracking.size===0)wasPinching=false;});
+canvas.addEventListener('wheel',e=>{e.preventDefault();setZoom(s.zoom*(e.deltaY<0?1.12:1/1.12))},{passive:false});
+canvas.addEventListener('keydown',e=>{if(e.key==='+'||e.key==='='){e.preventDefault();setZoom(s.zoom*1.25);return}if(e.key==='-'){e.preventDefault();setZoom(s.zoom/1.25);return}const ax=e.shiftKey?[0,0,1]:((e.key==='ArrowLeft'||e.key==='ArrowRight')?[0,1,0]:[1,0,0]);const step=.11;if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const sign=(e.key==='ArrowLeft'||e.key==='ArrowDown')?-1:1;s.q=qnorm(qmul(axisAngle(ax,sign*step),s.q));render3d()});
+// Parameterized asymptotic experiment.
+function trajectory(path,k){const lam=10**k;return {a:4*(path==='upper'||path==='uniform'?lam:1),b:8*(path==='lower'||path==='uniform'?lam:1),h:6*(path==='height'||path==='uniform'?lam:1)}}
+function plotPoints(){const path=$('path').value,points=[];for(let k=0;k<=12;k++){const v=trajectory(path,k);points.push({k,v:volume(v.a,v.b,v.h),...v})}return points}
+function renderAsym(){const path=$('path').value,k=Number($('exp').value),now=trajectory(path,k),v=volume(now.a,now.b,now.h),points=plotPoints(),title={height:'linear em λ: V(λ) = λV(1)',lower:'quadrático assintótico: V(λ)/λ² → (h₀b₀²)/3',upper:'quadrático assintótico: V(λ)/λ² → (h₀a₀²)/3',uniform:'cúbico exato: V(λ) = λ³V(1)'}[path];put('factor','λ = 10'+sup(k));put('pathDimensions',`a = ${fmtInt(now.a)} u · b = ${fmtInt(now.b)} u · h = ${fmtInt(now.h)} u`);put('pathVolume','V = '+fmt(v)+' u³');put('growthDescription',title);let prev=trajectory(path,Math.max(0,k-1)),pv=volume(prev.a,prev.b,prev.h),ratio=k>0?v/pv:null;put('slopeNote',k>0?`Entre 10${sup(k-1)} e 10${sup(k)}, o volume foi multiplicado por ${fmt(ratio)}; expoente efetivo ≈ ${fmt(Math.log10(ratio))}.`:'Aumente o expoente k para comparar duas ordens de grandeza sucessivas.');let html='';for(let n of [0,1,2,3,6,9,12]){let d=trajectory(path,n);html+=`<tr><td>10${sup(n)}</td><td>${fmtInt(d.a)}</td><td>${fmtInt(d.b)}</td><td>${fmtInt(d.h)}</td><td>${fmt(volume(d.a,d.b,d.h))}</td></tr>`}$('asymRows').innerHTML=html;renderChart(points,k)}
+function renderChart(points=plotPoints(),selected=Number($('exp').value)){const R=graph.getBoundingClientRect(),w=R.width,h=R.height;if(w===0||h===0)return;gctx.clearRect(0,0,w,h);const margins={l:53,r:21,t:17,b:36},X=n=>margins.l+n/12*(w-margins.l-margins.r),y0=Math.floor(Math.log10(points[0].v)),y1=Math.ceil(Math.log10(points[12].v))+1,Y=n=>h-margins.b-(n-y0)/(y1-y0)*(h-margins.b-margins.t);
+gctx.font='11px system-ui';gctx.lineWidth=1;for(let i=0;i<=4;i++){let yy=y0+i*(y1-y0)/4,py=Y(yy);gctx.strokeStyle='#dce7ec';gctx.beginPath();gctx.moveTo(margins.l,py);gctx.lineTo(w-margins.r,py);gctx.stroke();gctx.fillStyle='#718695';gctx.fillText('10'+sup(Math.round(yy)),7,py+4)}for(let i=0;i<=12;i+=2){let px=X(i);gctx.strokeStyle='#edf2f5';gctx.beginPath();gctx.moveTo(px,margins.t);gctx.lineTo(px,h-margins.b);gctx.stroke();gctx.fillStyle='#5c7586';gctx.fillText(String(i),px-3,h-14)}gctx.fillStyle='#456476';gctx.fillText('k (λ = 10ᵏ)',Math.max(55,w/2-33),h-1);gctx.save();gctx.beginPath();gctx.rect(margins.l,margins.t,w-margins.r-margins.l,h-margins.t-margins.b);gctx.clip();gctx.strokeStyle='#07809a';gctx.lineWidth=3;gctx.beginPath();points.forEach((p,i)=>{const px=X(p.k),py=Y(Math.log10(p.v));if(i===0)gctx.moveTo(px,py);else gctx.lineTo(px,py)});gctx.stroke();let cur=points[selected];gctx.fillStyle='#ea8e23';gctx.beginPath();gctx.arc(X(cur.k),Y(Math.log10(cur.v)),5.2,0,Math.PI*2);gctx.fill();gctx.strokeStyle='#fff';gctx.lineWidth=2;gctx.stroke();gctx.restore()}
+for(const id of ['base','top','height','magBase','magTop','magHeight','slice'])$(id).addEventListener('input',update);
+function toggle(btn,key,off,on){$(btn).addEventListener('click',()=>{s[key]=!s[key];$(btn).classList.toggle('on',s[key]);$(btn).setAttribute('aria-pressed',s[key]?'true':'false');put(btn,s[key]?on:off);if(key==='section')$('sliceControl').classList.toggle('hidden',!s.section);update()})}
+toggle('tipBtn','tip','+ Reconstruir a ponta','− Ocultar ponta');toggle('sliceBtn','section','+ Ver seção transversal','− Ocultar seção');toggle('spinBtn','spin','↻ Rotação automática','Ⅱ Pausar rotação');
+$('resetBtn').addEventListener('click',()=>{s.q=homeQ();s.panX=0;s.panY=0;labelOffsets={};setZoom(1)});
+$('topViewBtn').addEventListener('click',()=>{s.q=axisAngle([1,0,0],Math.PI/2);render3d()});
+$('bottomViewBtn').addEventListener('click',()=>{s.q=axisAngle([1,0,0],-Math.PI/2);render3d()});
+$('flipBtn').addEventListener('click',()=>{s.q=qnorm(qmul(axisAngle([1,0,0],Math.PI),s.q));render3d()});
+$('opacity').addEventListener('input',e=>{s.opacity=+e.target.value;put('opacityOut',s.opacity+'%');render3d()});
+$('measureAlpha').addEventListener('input',e=>{s.measureAlpha=+e.target.value;put('measureAlphaOut',s.measureAlpha+'%');$('measureStrip').style.opacity=String(s.measureAlpha/100);render3d()});
+$('labelMode').addEventListener('change',e=>{s.labelMode=e.target.value;labelOffsets={};updateMeasureStrip();render3d()});
+$('zoomIn').addEventListener('click',()=>setZoom(s.zoom*1.25));
+$('zoomOut').addEventListener('click',()=>setZoom(s.zoom/1.25));
+$('zoomFit').addEventListener('click',()=>{s.panX=0;s.panY=0;setZoom(1)});
+$('zoomRange').addEventListener('input',e=>setZoom(+e.target.value/100));
+$('showMeasures').addEventListener('change',e=>{s.measures=e.target.checked;render3d()});
+$('showGrid').addEventListener('change',e=>{s.grid=e.target.checked;render3d()});$('pngBtn').addEventListener('click',()=>{const el=document.createElement('a');el.href=canvas.toDataURL('image/png');el.download='tronco-de-piramide-3d.png';el.click()});
+const preset={reset:[4,8,6],high:[4,8,6e12],wideB:[4,8e12,6],wideA:[4e12,8,6],uniform:[4e12,8e12,6e12],prism:[8,8,6],pyramid:[0,8,6]};document.querySelectorAll('[data-preset]').forEach(el=>el.addEventListener('click',()=>{let d=preset[el.dataset.preset];setDims(...d)}));
+$('path').addEventListener('change',renderAsym);$('exp').addEventListener('input',renderAsym);$('applyPath').addEventListener('click',()=>{let d=trajectory($('path').value,+$('exp').value);setDims(d.a,d.b,d.h);$('modelo').scrollIntoView({behavior:'smooth',block:'start'})});
+let last=0;const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;function animate(t){if(s.spin&&!reduce&&t-last>15){s.q=qnorm(qmul(axisAngle([0,1,0],.004),s.q));render3d();last=t}requestAnimationFrame(animate)}
+window.addEventListener('resize',resize);update();resize();renderAsym();requestAnimationFrame(animate);
+})();
+</script>
+</body>
+</html>
